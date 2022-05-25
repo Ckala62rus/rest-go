@@ -18,3 +18,7 @@
     docker exec -ti rest-go /bin/bash
     psql -U postgres
     вывести все таблицы \d
+11. Установка пакета для работы с БД
+    go get -u github.com/jmoiron/sqlx
+12. Для работы с переменными окружения .ENV установим пакет
+    go get -u github.com/joho/godotenv
