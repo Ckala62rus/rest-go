@@ -22,3 +22,14 @@
     go get -u github.com/jmoiron/sqlx
 12. Для работы с переменными окружения .ENV установим пакет
     go get -u github.com/joho/godotenv
+13. Установка MySQL пакета (драйвера)
+    go get -u github.com/go-sql-driver/mysql
+
+Примечание:
+для смены бд postgres на mysql необходимо скачать драйвер, создать новую обертку для репозитория,
+а так же выполнить эти команды(для конкретной бд). Без них будет ругаться, что драйвера нет!
+go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+go install -tags 'mysql' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+
+выполнение миграции для mysql
+migrate -path ./schema -database 'mysql://root:000000@tcp(0.0.0.0:3306)/go?query' up

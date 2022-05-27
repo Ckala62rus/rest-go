@@ -1,6 +1,13 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+// import "github.com/jmoiron/sqlx"
+import (
+	// "database/sql"
+
+	"database/sql"
+
+	_ "github.com/go-sql-driver/mysql"
+)
 
 type Authorization interface {
 }
@@ -17,6 +24,7 @@ type Repository struct {
 	TodoItem
 }
 
-func NewRepository(db *sqlx.DB) *Repository {
+// func NewRepository(db *sqlx.DB) *Repository {
+func NewRepository(db *sql.DB) *Repository {
 	return &Repository{}
 }
