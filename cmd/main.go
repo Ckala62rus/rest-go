@@ -25,13 +25,22 @@ func main() {
 		logrus.Fatalf("error loading env variables: %s", err.Error())
 	}
 
-	db, err := repository.NewPostgressDB(repository.Config{
-		Host:     viper.GetString("db.host"),
-		Port:     viper.GetString("db.port"),
-		Username: viper.GetString("db.username"),
-		Password: os.Getenv("DB_PASSWORD"),
-		DBName:   viper.GetString("db.dbname"),
-		SSLMode:  viper.GetString("db.sslmode"),
+	// db, err := repository.NewPostgressDB(repository.Config{
+	// 	Host:     viper.GetString("db.host"),
+	// 	Port:     viper.GetString("db.port"),
+	// 	Username: viper.GetString("db.username"),
+	// 	Password: os.Getenv("DB_PASSWORD"),
+	// 	DBName:   viper.GetString("db.dbname"),
+	// 	SSLMode:  viper.GetString("db.sslmode"),
+	// })
+
+	db, err := repository.NewMysqlDB(repository.ConfigMySQL{
+		Host:     viper.GetString("mysql.host"),
+		Port:     viper.GetString("mysql.port"),
+		Username: viper.GetString("mysql.username"),
+		Password: os.Getenv("000000"),
+		DBName:   viper.GetString("mysql.dbname"),
+		SSLMode:  viper.GetString("mysql.sslmode"),
 	})
 
 	// db, err := repository.NewMysqlDB(repository.ConfigMySQL{})

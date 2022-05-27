@@ -25,7 +25,10 @@ type ConfigMySQL struct {
 }
 
 func NewMysqlDB(cfg ConfigMySQL) (*sql.DB, error) {
-	db, err := sql.Open("mysql", "root:3306@tcp(mysql-education:3306)/go")
+	// db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", cfg.Username, cfg.Password, cfg.Host, cfg.Port, cfg.DBName))
+
+	// logrus.Info(fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", cfg.Username, cfg.Password, cfg.Host, cfg.Port, cfg.DBName))
+	db, err := sql.Open("mysql", "root:000000@tcp(0.0.0.0:3306)/go")
 	if err != nil {
 		panic(err)
 	}
