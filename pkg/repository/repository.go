@@ -4,12 +4,13 @@ package repository
 import (
 	// "database/sql"
 
-	"database/sql"
-
-	_ "github.com/go-sql-driver/mysql"
+	"github.com/Ckala62rus/rest-go"
+	// _ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
 )
 
 type Authorization interface {
+	CreateUser(user rest.User) (int, error)
 }
 
 type TodoList interface {
@@ -24,7 +25,9 @@ type Repository struct {
 	TodoItem
 }
 
-// func NewRepository(db *sqlx.DB) *Repository {
-func NewRepository(db *sql.DB) *Repository {
-	return &Repository{}
+func NewRepository(db *sqlx.DB) *Repository {
+	// func NewRepository(db *sql.DB) *Repository {
+	return &Repository{
+		Authorization: NewAuthPostgres(db),
+	}
 }

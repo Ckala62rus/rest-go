@@ -24,6 +24,8 @@
     go get -u github.com/joho/godotenv
 13. Установка MySQL пакета (драйвера)
     go get -u github.com/go-sql-driver/mysql
+14. Установка пакета для логирования Logrus
+   go get -u github.com/sirupsen/logrus
 
 Примечание:
 для смены бд postgres на mysql необходимо скачать драйвер, создать новую обертку для репозитория,
@@ -33,3 +35,8 @@ go install -tags 'mysql' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 
 выполнение миграции для mysql
 migrate -path ./schema -database 'mysql://root:000000@tcp(0.0.0.0:3306)/go?query' up
+
+обновление модулей(пакетов)
+go get -u all
+
+docker pull postgres

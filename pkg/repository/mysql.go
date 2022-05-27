@@ -7,6 +7,14 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+const (
+	userTable       = "users"
+	todoListsTable  = "todo_lists"
+	usersListsTable = "users_lists"
+	todoItemsTable  = "todo_items"
+	listsItemTable  = "lists_items"
+)
+
 type ConfigMySQL struct {
 	Host     string
 	Port     string
@@ -16,19 +24,7 @@ type ConfigMySQL struct {
 	SSLMode  string
 }
 
-func NewMysqlDB(cfg Config) (*sql.DB, error) {
-	// db, err := sqlx.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
-	// 	cfg.Host, cfg.Port, cfg.Username, cfg.DBName, cfg.Password, cfg.SSLMode))
-
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// err = db.Ping()
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// mysql-education 3306 root 000000 go
+func NewMysqlDB(cfg ConfigMySQL) (*sql.DB, error) {
 	db, err := sql.Open("mysql", "root:3306@tcp(mysql-education:3306)/go")
 	if err != nil {
 		panic(err)
