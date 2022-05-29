@@ -25,7 +25,9 @@
 13. Установка MySQL пакета (драйвера)
     go get -u github.com/go-sql-driver/mysql
 14. Установка пакета для логирования Logrus
-   go get -u github.com/sirupsen/logrus
+    go get -u github.com/sirupsen/logrus
+15. Установка пакета для JWT аутентификации
+    go get -u github.com/dgrijalva/jwt-go
 
 Примечание:
 для смены бд postgres на mysql необходимо скачать драйвер, создать новую обертку для репозитория,

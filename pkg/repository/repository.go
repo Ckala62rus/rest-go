@@ -11,6 +11,7 @@ import (
 
 type Authorization interface {
 	CreateUser(user rest.User) (int, error)
+	GetUser(username, password string) (rest.User, error)
 }
 
 type TodoList interface {
