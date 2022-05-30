@@ -8,7 +8,6 @@ import (
 	"github.com/Ckala62rus/rest-go"
 	"github.com/Ckala62rus/rest-go/pkg/repository"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/sirupsen/logrus"
 )
 
 const (
@@ -38,7 +37,11 @@ func (s *AuthService) CreateUser(user rest.User) (int, error) {
 func (s *AuthService) GenerateToken(username string, password string) (string, error) {
 	user, err := s.repo.GetUser(username, generatePasswordHash(password))
 
-	logrus.Debug(user)
+	if user.Id == 0 {
+		return "User not found", err
+	}
+
+	// logrus.Fatal(user.Id)
 
 	if err != nil {
 		return "", err
