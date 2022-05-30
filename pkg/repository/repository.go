@@ -15,6 +15,7 @@ type Authorization interface {
 }
 
 type TodoList interface {
+	Create(userId int, list rest.TodoList) (int, error)
 }
 
 type TodoItem interface {
@@ -31,5 +32,6 @@ func NewRepository(db *sql.DB) *Repository {
 	return &Repository{
 		// Authorization: NewAuthPostgres(db),
 		Authorization: NewAuthMysql(db),
+		TodoList:      NewTodoListMysql(db),
 	}
 }

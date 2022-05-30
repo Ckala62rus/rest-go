@@ -52,7 +52,6 @@ func (r *AuthMysql) CreateUser(user rest.User) (int, error) {
 func (r *AuthMysql) GetUser(username, password string) (rest.User, error) {
 	var user rest.User
 	query := fmt.Sprintf("select id from %s where username=? and password_hash=?", userTable)
-	// res := r.db.QueryRow(query, username, password)
 	res, err := r.db.Query(query, username, password)
 
 	if err != nil {
