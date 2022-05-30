@@ -16,8 +16,13 @@ CREATE TABLE todo_lists
 CREATE TABLE users_lists
 (
     id int PRIMARY KEY AUTO_INCREMENT,
-    user_id int references users (id) on delete cascade,
-    list_id int references todo_lists (id) on delete cascade
+    user_id int,
+    list_id int,
+
+    foreign key (user_id) references users (id) on delete cascade,
+    foreign key (list_id) references todo_lists (id) on delete cascade
+    -- user_id int references users (id) on delete cascade,
+    -- list_id int references todo_lists (id) on delete cascade
 );
 
 CREATE TABLE todo_items
@@ -32,6 +37,11 @@ CREATE TABLE todo_items
 CREATE TABLE lists_items
 (
     id int PRIMARY KEY AUTO_INCREMENT,
-    item_id int references todo_items (id) on delete cascade,
-    list_id int references todo_lists (id) on delete cascade
+    item_id int,
+    list_id int,
+
+    foreign key (item_id) references todo_items (id) on delete cascade,
+    foreign key (list_id) references todo_lists (id) on delete cascade
+    -- item_id int references todo_items (id) on delete cascade,
+    -- list_id int references todo_lists (id) on delete cascade
 );
