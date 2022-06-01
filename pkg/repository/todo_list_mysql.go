@@ -66,29 +66,30 @@ func (r *TodoListMysql) Create(userId int, list rest.TodoList) (int, error) {
 
 func (r *TodoListMysql) GetAll(userId int) ([]rest.TodoList, error) {
 	var lists []rest.TodoList
-	query := fmt.Sprintf("SELECT t1.id, t1.title, t1.description FROM %s t1 INNER JOIN %s ul on t1.id=ul.list_id WHERE ul.user_id = ?", todoListsTable, usersListsTable)
-	// res, err := r.db.Query(query, userId)
-	res := r.db.QueryRow(query, userId)
 
-	logrus.Info(res)
+	query := fmt.Sprintf(`
+		SELECT 
+			t1.id, t1.title, t1.description 
+		FROM 
+			%s t1 
+			INNER JOIN %s ul on t1.id=ul.list_id 
+		WHERE ul.user_id = ?`, todoListsTable, usersListsTable)
 
-	// if err != nil {
-	// 	return lists, err
-	// }
-
-	// if err != nil {
-	// 	return lists, err
-	// }
-
-	// for res.Next() {
-	// 	err = res.Scan(&lists)
-	// 	if err != nil {
-	// 		return lists, err
-	// 	}
-	// }
-
-	err := res.Scan(&lists)
+	rows, err := r.db.Query(query, userId)
 	if err != nil {
+		logrus.Fatal(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var list rest.TodoList
+		if err := rows.Scan(&list.Id, &list.Title, &list.Description); err != nil {
+			return lists, err
+		}
+		lists = append(lists, list)
+	}
+
+	if err = rows.Err(); err != nil {
 		return lists, err
 	}
 
