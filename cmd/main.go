@@ -14,6 +14,23 @@ import (
 	"github.com/spf13/viper"
 )
 
+// @title           Swagger Example API
+// @version         1.0
+// @description     This is a sample server celler server.
+// @termsOfService  http://swagger.io/terms/
+
+// @contact.name   API Support
+// @contact.url    http://www.swagger.io/support
+// @contact.email  support@swagger.io
+
+// @license.name  Apache 2.0
+// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host      localhost:8000
+
+// @securitydefinitions.apikey
+// @in header
+// @name Authorization
 func main() {
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 
@@ -21,6 +38,7 @@ func main() {
 		logrus.Fatalf("error initializing configs: %s", err.Error())
 	}
 
+	// if err := godotenv.Load("../.env"); err != nil {
 	if err := godotenv.Load(); err != nil {
 		logrus.Fatalf("error loading env variables: %s", err.Error())
 	}
@@ -43,8 +61,6 @@ func main() {
 		SSLMode:  viper.GetString("mysql.sslmode"),
 	})
 
-	// db, err := repository.NewMysqlDB(repository.ConfigMySQL{})
-
 	if err != nil {
 		logrus.Fatal("failed to initialize db: %s", err.Error())
 	}
@@ -63,5 +79,7 @@ func main() {
 func initConfig() error {
 	viper.AddConfigPath("./configs")
 	viper.SetConfigName("config")
+	// viper.AddConfigPath("../configs")
+	// viper.SetConfigName("config")
 	return viper.ReadInConfig()
 }

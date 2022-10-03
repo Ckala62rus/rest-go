@@ -3,6 +3,10 @@ package handler
 import (
 	"github.com/Ckala62rus/rest-go/pkg/service"
 	"github.com/gin-gonic/gin"
+
+	_ "github.com/Ckala62rus/rest-go/docs"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type Handler struct {
@@ -42,6 +46,9 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			}
 		}
 	}
+
+	// http://localhost:8000/swagger/index.html
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	return router
 }

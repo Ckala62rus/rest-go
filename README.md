@@ -28,6 +28,15 @@
     go get -u github.com/sirupsen/logrus
 15. Установка пакета для JWT аутентификации
     go get -u github.com/dgrijalva/jwt-go
+16. Установка Swagger open api
+    swag init -g cmd/main.go
+    go install github.com/swaggo/swag/cmd/swag@latest
+
+инициализация и создание директории с документацией
+swag init -g ./cmd/main.go
+
+запуск проекта
+go run ./cmd/main.go
 
 Примечание:
 для смены бд postgres на mysql необходимо скачать драйвер, создать новую обертку для репозитория,
